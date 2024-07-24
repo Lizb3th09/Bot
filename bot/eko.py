@@ -14,7 +14,7 @@ Basic Echobot example, repeats messages.
 Press Ctrl-C on the command line or send a signal to the process to stop the
 bot.
 """
-
+import random
 import logging
 
 from telegram import (
@@ -34,6 +34,43 @@ logging.getLogger("httpx").setLevel(logging.WARNING)
 
 logger = logging.getLogger(__name__)
 
+
+# Esta Funcion muestra las imagenes del boton de Departamentos 
+async def Mapa(chat_id, context):
+    with open("Mapa.png", 'rb') as imagen1:
+        await context.bot.send_photo(chat_id=chat_id, photo=imagen1)
+    with open("Departamentos.png", 'rb') as imagen2:
+        await context.bot.send_photo(chat_id=chat_id, photo=imagen2)
+
+ # Esta Funcion muestra las imagenes del boton de Titulo  
+async def Titul(chat_id, context):
+    with open("1.png", 'rb') as imagen3:
+        await context.bot.send_photo(chat_id=chat_id, photo=imagen3)
+    with open("2.png", 'rb') as imagen4:
+        await context.bot.send_photo(chat_id=chat_id, photo=imagen4)
+
+    with open("4.jpeg", 'rb') as imagen5:
+        await context.bot.send_photo(chat_id=chat_id, photo=imagen5)
+    with open("5.jpeg", 'rb') as imagen6:
+        await context.bot.send_photo(chat_id=chat_id, photo=imagen6)
+
+# Funcion manda un archivo pdf en el boton Titulo
+async def titul(chat_id, context, pdf_path):
+    with open(pdf_path, 'rb') as pdf_file:
+        await context.bot.send_document(chat_id=chat_id, document=pdf_file)
+
+# Funcion que muestra las imagenes del boton de seguro social
+async def seguro(chat_id, context):
+    with open("alta2.png", 'rb') as imagen7:
+        await context.bot.send_photo(chat_id=chat_id, photo=imagen7)
+    with open("alta.png", 'rb') as imagen8:
+        await context.bot.send_photo(chat_id=chat_id, photo=imagen8)
+
+# Funcion para mandar la imagen del boton inscripcion
+async def Inscripcion(chat_id, context):
+    with open("Inscripcion.png", 'rb') as imagen9:
+        await context.bot.send_photo(chat_id=chat_id, photo=imagen9)
+   
 
 # Define a few command handlers. These usually take the two arguments update and
 # context.
@@ -56,6 +93,7 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
     # CallbackQueries need to be answered, even if no notification to the user is needed
     # Some clients may have trouble otherwise. See https://core.telegram.org/bots/api#callbackquery
+
     await query.answer()
     
     #Respuesta de los botones
@@ -64,56 +102,55 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         
         credencial = [
             [InlineKeyboardButton('Nueva Credencial', callback_data='Nueva_Credencial')],
-            [InlineKeyboardButton('Extravío de Credencial', callback_data='Extravío_Credencial')],
+            [InlineKeyboardButton('Extravío de Credencial', callback_data='Extravio_Credencial')],
         ]
         await query.edit_message_text(text="Seleccionaste Credencial. ¿Qué quieres hacer?", reply_markup=InlineKeyboardMarkup(credencial))        
     
     elif query.data == 'Nueva_Credencial':
-        await query.edit_message_text(text="Aquí tienes el formulario para una nueva credencial. https://docs.google.com/forms/d/e/1FAIpQLSc_C-74SkgvzJvdmu72Vec-DaH6MMzfyhr2_27OfKqv1B5dng/viewform")
+        await query.edit_message_text(text=" Claro  Para solicitar tu credencial estudiantil  es necesario tomarte una foto, con fondo blanco,cara descubierta (sin lentes,aretes o pirsings ) recordar pasar a escolores en el horario de  lunes a viernes 9:00 a 18:00. Aquí tienes el formulario para solicitar tu credencial por primera vez. https://docs.google.com/forms/d/e/1FAIpQLSc_C-74SkgvzJvdmu72Vec-DaH6MMzfyhr2_27OfKqv1B5dng/viewform")
+    
+    elif query.data == 'Extravio_Credencial':
+        await query.edit_message_text(text="Para Reposicion de la credencial en caso de que se te haya extraviado, mandar un correo a escolares@ite.edu.mx  solicitando la reposicion de tu credencial. Recordar pasar a escolores en el horario de  lunes a viernes 9:00 a 18:00")
+    
     elif "Constancia" in query.data:
-        await query.edit_message_text(text="Manda correo a escolares@ite.edu.mx para solicitar tu constancia de estudios")
+        await query.edit_message_text(text="Para solicitar una constancia de estudios  mandar una descripcion para que es solicitada a : escolares@ite.edu.mx")
+    
     elif "Titulo" in query.data:
-        await query.edit_message_text(text="Estos son los documentos que se necesitan para la Titulacion")
-    elif "Departamentos" in query.data:
-        await query.edit_message_text(text="Te muestro el mapa de donde esta cada oficina y en que edificio se encuentra")
+        await query.edit_message_text(text="Aquí están los requisitos para solicitar el título y las diferentes Formas para Titularte. Te mostramos los pasos a seguir y Descarga el archivo adjunto.")
+        chat_id = update.effective_chat.id
+        await Titul(chat_id, context)   
+        await titul(chat_id, context,"Requisitos del titulo.pdf")
+        
     elif "Seguro social" in query.data:
-        await query.edit_message_text(text="Necesitas los siguiemtes documentos")
+        await query.edit_message_text(text="Aquí tienes la información con los pasos para dar de alta tu seguro social.")
+        chat_id = update.effective_chat.id
+        await seguro(chat_id, context)    
+       
+    elif query.data == "Departamentos":   
+        await query.edit_message_text(text="Aquí tienes un mapa general de la universidad, Espero que te sea de ayuda.")
+        chat_id = update.effective_chat.id
+        await Mapa(chat_id, context)
+    
+    elif query.data == "Inscripcion":
+        await query.edit_message_text(text="Aquí tienes la información sobre la inscripción.")
+        chat_id = update.effective_chat.id
+        await Inscripcion(chat_id, context)  
+            
     #await query.edit_message_text(text=f"Selected option: {query.data}")
 
 async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     
-    #mensaje = update.message.text
-    
+    #Saludos
+    saludos = ['Hola', 'hola', 'Buenos días', 'buenos días', 'Buenas tardes', 'buenas tardes','Holi','AidMe']
+    Respuestas = [ "¿Cómo puedo ayudarte hoy? 😁", "¡Hola! ¿En qué puedo asistirte? 😊","Holi ¿Qué necesitas? ","¡Hola! ¿Qué tal? 🤗"]
 
-# Respuestas si el usuario escribe las opciones
-
-    if update.message.text == 'Credencial':
-        credencial = "Aquí tienes el formulario para la credencial https://docs.google.com/forms/d/e/1FAIpQLSc_C-74SkgvzJvdmu72Vec-DaH6MMzfyhr2_27OfKqv1B5dng/viewform"
-        await update.message.reply_text(credencial)
-    
-    if update.message.text == 'Constancia':
-        constancia = "Manda correo a escolares@ite.edu.mx para solicitar tu constancia de estudios"
-        await update.message.reply_text(constancia)
-    
-    if update.message.text == 'Titulo':
-        titulo = "Estos son los documentos que se necesitan para la Titulacion"
-        await update.message.reply_text(titulo)
-    
-    if update.message.text == 'Departamentos':
-        departamento = "Te muestro el mapa de donde esta cada oficina y en que edificio se encuentra"
-        await update.message.reply_text(departamento)
-    
-    if update.message.text == 'Seguro social':
-        seguro = "Necesitas los siguiemtes documentos"
-        await update.message.reply_text(seguro)
-    
-    
-    if update.message.text == 'Hola':
-        saludo = "Como puedo ayudarte hoy 😁"
-        await update.message.reply_text(saludo)
-    
-    if update.message.text == '😊':
+    if update.message.text in saludos:
+        respuesta= random.choice(Respuestas)
+        await update.message.reply_text(respuesta)
         
+    # Menu     
+    if update.message.text == '😊' or update.message.text == 'Menu' :  
+       
         # Botones de  las opciones
         
         keyboard = [[InlineKeyboardButton('Credencial', callback_data='Credencial')], 
@@ -121,6 +158,7 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             [InlineKeyboardButton('Titulo', callback_data='Titulo')],
             [InlineKeyboardButton('Departamentos', callback_data='Departamentos'),
            ], [InlineKeyboardButton('Seguro social', callback_data='Seguro social'),
+           ], [InlineKeyboardButton('Inscripcion', callback_data='Inscripcion'),
            ]]
         
         menu_choices = InlineKeyboardMarkup(keyboard)
