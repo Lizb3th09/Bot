@@ -140,6 +140,40 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
 async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     
+    # Malas Palabras
+    groserias = [
+    'estúpido','estupido','estupida','estúpida', 'imbécil', 'imbecil','idiota', 'pendejo','pendeja', 'maldito', 'cabrón', 'hijo de puta',
+    'Puto', 'zorra', 'Puta', 'mierda', 'chingar', 'maricón','maricon', 'puto', 'culo','mamon', 'gordo', 'chingada', 'Chingada','cerdo', 'perra', 'pito', 
+    'baboso', 'mamada','Tonto', 'naco', 'Tonta', 'jodido', 'desgraciado','tonto','tonta','inutil', 'pendejada','asqueroso','cojer', 
+    'burrada','no sirves']
+    user_message = update.message.text.lower()
+
+    Palabrota = [ "No digas groserias 😒", "Por favor, usa un lenguaje respetuoso ",
+    "Evita usar palabras ofensivas 🤐","No permitimos este tipo de lenguaje",
+    "Evitanos la pena de banearte del bot 🤭","No es necesario usar lenguaje ofensivo.","Nos reservamos el derecho en ayudarte 😵"]
+    
+    if any(word in user_message for word in groserias):
+        palabrota= random.choice(Palabrota)
+        await update.message.reply_text(palabrota)
+
+    # falta desarrollar el baneo
+    
+   
+   # Help
+    if update.message.text == 'ayuda' or update.message.text == 'Ayuda':
+        help_message = (
+        "¡Hola! 😊 Aquí tienes la información que necesitas:\n\n"
+        "Para abrir el menú de opciones, puedes:\n"
+        "1. Escribir Menu o 😊.\n"
+        "En el menú de opciones, encontrarás diversas funciones y servicios disponibles.\n\n"
+        "Si necesitas más información o tienes alguna pregunta, no dudes en contactarnos al "
+        "número 📞 7676718158.\n\n"
+        "¡Estamos aquí para ayudarte!"
+    )
+        await update.message.reply_text(help_message)
+  
+        
+    
     #Saludos
     saludos = ['Hola', 'hola', 'Buenos días', 'buenos días', 'Buenas tardes', 'buenas tardes','Holi','AidMe']
     Respuestas = [ "¿Cómo puedo ayudarte hoy? 😁", "¡Hola! ¿En qué puedo asistirte? 😊","Holi ¿Qué necesitas? ","¡Hola! ¿Qué tal? 🤗"]
@@ -149,7 +183,7 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         await update.message.reply_text(respuesta)
         
     # Menu     
-    if update.message.text == '😊' or update.message.text == 'Menu' :  
+    if update.message.text == '😊' or update.message.text == 'Menu'or update.message.text == 'menu' :  
        
         # Botones de  las opciones
         
