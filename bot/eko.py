@@ -176,7 +176,8 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
     Palabrota = [ "No digas groserias 😒", "Por favor, usa un lenguaje respetuoso ",
     "Evita usar palabras ofensivas 🤐","No permitimos este tipo de lenguaje",
-    "Evitanos la pena de banearte del bot 🤭","No es necesario usar lenguaje ofensivo.","Nos reservamos el derecho en ayudarte 😵"]
+    "Evitanos la pena de banearte del bot 🤭","No es necesario usar lenguaje ofensivo.","Nos reservamos el derecho de ayudarte 😵"]
+    
     
     if any(word in user_message for word in groserias):
         palabrota= random.choice(Palabrota)
@@ -184,6 +185,19 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
     # falta desarrollar el baneo
     
+   
+   # despedida
+    gracias=['Gracias','gracias'] 
+   
+    agradecimientos = [ 'Un gusto en ayudarte 😊', '¡De nada! Siempre aquí para ayudarte.',
+    'No hay problema, ¡feliz de ayudar!', '¡Gracias a ti! 😊', '¡Con gusto!',
+    '¡Siempre es un placer ayudar!', '¡A tu servicio!']
+
+    if any(word in user_message for word in gracias):
+        agradece = random.choice(agradecimientos)
+        await update.message.reply_text(agradece)
+   
+   
    
    # Help
     if update.message.text == 'ayuda' or update.message.text == 'Ayuda':
@@ -201,7 +215,7 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         
     
     #Saludos
-    saludos = ['Hola', 'hola', 'Buenos días', 'buenos días', 'Buenas tardes', 'buenas tardes','Holi','AidMe']
+    saludos = ['Hola', 'hola', 'holi','Buenos días', 'buenos días', 'Buenas tardes', 'buenas tardes','Holi','AidMe']
     Respuestas = [ "¿Cómo puedo ayudarte hoy? 😁", "¡Hola! ¿En qué puedo asistirte? 😊","Holi ¿Qué necesitas? ","¡Hola! ¿Qué tal? 🤗"]
 
     if update.message.text in saludos:
