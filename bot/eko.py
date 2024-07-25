@@ -72,6 +72,27 @@ async def Inscripcion(chat_id, context):
         await context.bot.send_photo(chat_id=chat_id, photo=imagen9)
    
 
+# Funcion para mandar las imagenes de actividades complementarias
+async def actividades(chat_id, context):
+    with open("Ajedres.png", 'rb') as imagen10:
+        await context.bot.send_photo(chat_id=chat_id, photo=imagen10)
+    with open("Atletismo.png", 'rb') as imagen11:
+        await context.bot.send_photo(chat_id=chat_id, photo=imagen11)
+    with open("Basquetbol.png", 'rb') as imagen12:
+        await context.bot.send_photo(chat_id=chat_id, photo=imagen12)  
+    with open("beisbol.png", 'rb') as imagen13:
+        await context.bot.send_photo(chat_id=chat_id, photo=imagen13)        
+    with open("Escolta.png", 'rb') as imagen14:
+        await context.bot.send_photo(chat_id=chat_id, photo=imagen14) 
+    with open("Fut femenil.png", 'rb') as imagen15:
+        await context.bot.send_photo(chat_id=chat_id, photo=imagen15)    
+    with open("Fut varonil.png", 'rb') as imagen16:
+        await context.bot.send_photo(chat_id=chat_id, photo=imagen16)   
+    with open("Musica.png", 'rb') as imagen17:
+        await context.bot.send_photo(chat_id=chat_id, photo=imagen17)
+    with open("soft femenil.png", 'rb') as imagen18:
+        await context.bot.send_photo(chat_id=chat_id, photo=imagen18) 
+           
 # Define a few command handlers. These usually take the two arguments update and
 # context.
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -136,6 +157,11 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         chat_id = update.effective_chat.id
         await Inscripcion(chat_id, context)  
             
+    elif query.data == "Actividades complementarias":
+        await query.edit_message_text(text="Te muestro las actividades que puedes realizar")
+        chat_id = update.effective_chat.id
+        await actividades(chat_id, context) 
+        
     #await query.edit_message_text(text=f"Selected option: {query.data}")
 
 async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -145,7 +171,7 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     'estúpido','estupido','estupida','estúpida', 'imbécil', 'imbecil','idiota', 'pendejo','pendeja', 'maldito', 'cabrón', 'hijo de puta',
     'Puto', 'zorra', 'Puta', 'mierda', 'chingar', 'maricón','maricon', 'puto', 'culo','mamon', 'gordo', 'chingada', 'Chingada','cerdo', 'perra', 'pito', 
     'baboso', 'mamada','Tonto', 'naco', 'Tonta', 'jodido', 'desgraciado','tonto','tonta','inutil', 'pendejada','asqueroso','cojer', 
-    'burrada','no sirves']
+    'burrada','no sirves','mamar','pelar','chupar','chupas','pelas',]
     user_message = update.message.text.lower()
 
     Palabrota = [ "No digas groserias 😒", "Por favor, usa un lenguaje respetuoso ",
@@ -193,6 +219,7 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             [InlineKeyboardButton('Departamentos', callback_data='Departamentos'),
            ], [InlineKeyboardButton('Seguro social', callback_data='Seguro social'),
            ], [InlineKeyboardButton('Inscripcion', callback_data='Inscripcion'),
+           ],[InlineKeyboardButton('Actividades complementarias', callback_data='Actividades complementarias'),
            ]]
         
         menu_choices = InlineKeyboardMarkup(keyboard)
