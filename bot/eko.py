@@ -241,7 +241,7 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         
 # Send the message with menu
         await context.bot.send_message(
-    chat_id=update.message.chat_id, text="Menu de Opciones", reply_markup=menu_choices)
+    chat_id=update.message.chat_id, text="Selección de servicios", reply_markup=menu_choices)
         return 
 
 def main() -> None:
