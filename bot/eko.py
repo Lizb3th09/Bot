@@ -204,7 +204,7 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         help_message = (
         "¡Hola! 😊 Aquí tienes la información que necesitas:\n\n"
         "Para abrir el menú de servicios,  puedes:\n"
-        "1. Escribir Menu o 😊.\n"
+        "1. Escribir Servicios o 😊.\n"
         "Encontrarás diversos servicios disponibles.\n\n"
         "Si necesitas más información o tienes alguna pregunta, no dudes en contactarnos al "
         "número 📞 7676718158.\n\n"
@@ -223,7 +223,7 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         await update.message.reply_text(respuesta)
         
     # Menu     
-    if update.message.text == '😊' or update.message.text == 'Menu'or update.message.text == 'menu' :  
+    if update.message.text == '😊' or update.message.text == 'Servicios'or update.message.text == 'servicios' :  
        
         # Botones de  las opciones
         
