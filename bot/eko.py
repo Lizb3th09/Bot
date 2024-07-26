@@ -169,9 +169,9 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     # Malas Palabras
     groserias = [
     'estúpido','estupido','estupida','estúpida', 'imbécil', 'imbecil','idiota', 'pendejo','pendeja', 'maldito', 'cabrón', 'hijo de puta',
-    'Puto', 'zorra', 'Puta', 'mierda', 'chingar', 'maricón','maricon', 'puto', 'culo','mamon', 'gordo', 'chingada', 'Chingada','cerdo', 'perra', 'pito', 
+    'Puto', 'zorra', 'Puta', 'mierda', 'chingar', 'maricón','maricon', 'puto', 'culo','mamon', 'gordo', 'chingada', 'Chingada','Chingas','cerdo', 'perra', 'pito', 
     'baboso', 'mamada','Tonto', 'naco', 'Tonta', 'jodido', 'desgraciado','tonto','tonta','inutil', 'pendejada','asqueroso','cojer', 
-    'burrada','no sirves','mamar','pelar','chupar','chupas','pelas',]
+    'burrada','no sirves','mamar','pelar','chupar','chupas','pelas','chingas']
     user_message = update.message.text.lower()
 
     Palabrota = [ "No digas groserias 😒", "Por favor, usa un lenguaje respetuoso ",
@@ -203,9 +203,9 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     if update.message.text == 'ayuda' or update.message.text == 'Ayuda':
         help_message = (
         "¡Hola! 😊 Aquí tienes la información que necesitas:\n\n"
-        "Para abrir el menú de opciones, puedes:\n"
+        "Para abrir el menú de servicios,  puedes:\n"
         "1. Escribir Menu o 😊.\n"
-        "En el menú de opciones, encontrarás diversas funciones y servicios disponibles.\n\n"
+        "Encontrarás diversos servicios disponibles.\n\n"
         "Si necesitas más información o tienes alguna pregunta, no dudes en contactarnos al "
         "número 📞 7676718158.\n\n"
         "¡Estamos aquí para ayudarte!"
